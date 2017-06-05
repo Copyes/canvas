@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500" style="background-color: #000;">
+		<p>朋友你的浏览器不支持canvas，你还不升级下或者换个浏览器啊？</p>
+	</canvas>
+</body>
+<script src="./util.js"></script>
+<script>
+	window.onload = function(){
+		var canvas = document.getElementById('canvas');
+		var mouse = utils.captureMouse(canvas);
+
+		canvas.addEventListener('mousedown', function(event){
+			console.log(mouse.x + '----' + mouse.y);
+		});
+	}
+
+</script>
+</html>
