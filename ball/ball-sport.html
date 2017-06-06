@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>波形运动</title>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500" style="background-color: #000;">
+		<p>大兄弟你的浏览器竟然连canvas都不支持</p>
+	</canvas>
+</body>
+<script src="../util.js"></script>
+<script src="./ball.js"></script>
+<script>
+	
+	window.onload = function(){
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+		var ball = new Ball();
+
+		ball.x = canvas.width / 2;
+		ball.y = canvas.height / 2;
+
+		var angle = 0,
+			range = 50; //  振幅
+
+		(function drawFram(){
+			window.requestAnimationFrame(drawFram, context);
+
+			context.clearRect(0, 0, canvas.width, canvas.height);
+
+			ball.x = canvas.width / 2 + Math.sin(angle) * range; // 核心部分，圆心的x坐标成正弦波变化
+
+			angle += 0.1; // 每一帧角度加0.1
+
+			ball.draw(context);
+		})()
+
+	}
+</script>
+</html>
