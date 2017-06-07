@@ -12,31 +12,161 @@
 <script src="../util.js"></script>
 <script src="./ball.js"></script>
 <script>
-	
+	// 平滑运动
+	// window.onload = function(){
+	// 	var canvas = document.getElementById('canvas');
+	// 	var context = canvas.getContext('2d');
+
+	// 	var ball = new Ball();
+
+	// 	ball.x = canvas.width / 2;
+	// 	ball.y = canvas.height / 2;
+
+	// 	var angle = 0,
+	// 		range = 50; //  振幅
+
+	// 	(function drawFram(){
+	// 		window.requestAnimationFrame(drawFram, context);
+
+	// 		context.clearRect(0, 0, canvas.width, canvas.height);
+
+	// 		ball.x = canvas.width / 2 + Math.sin(angle) * range; // 核心部分，圆心的x坐标成正弦波变化
+
+	// 		angle += 0.1; // 每一帧角度加0.1
+
+	// 		ball.draw(context);
+	// 	})()
+
+	// }
+	// 
+	// 线性运动
+	// window.onload = function(){
+	// 	var canvas = document.getElementById('canvas');
+	// 	var context = canvas.getContext('2d');
+		
+	// 	var angle = 0,
+	// 		range = 50,
+	// 		speedX = 1,
+	// 		speedY = 0.05;
+
+	// 	var ball = new Ball();
+
+	// 	(function drawFram(){
+	// 		window.requestAnimationFrame(drawFram, context);
+
+	// 		context.clearRect(0,0,canvas.width, canvas.height);
+
+	// 		ball.x += speedX;  // 水平方向运动
+	// 		//ball.y += speedY; 
+			
+	// 		//边界判断
+	// 		if(ball.x > canvas.width + ball.radius){
+	// 			ball.x = -ball.radius;
+	// 		}
+
+	// 		// 垂直方向
+	// 		ball.y = canvas.height / 2 + Math.sin(angle) * range;
+	// 		// 改变下角度
+	// 		//angle += 0.5;
+
+	// 		ball.draw(context);
+
+	// 	})();
+	// }
+	// 
+	// 脉冲运动
+	// window.onload = function(){
+	// 	var canvas = document.getElementById('canvas');
+	// 	var context = canvas.getContext('2d');
+		
+	// 	var angle = 0,
+	// 		range = 0.5,
+	// 		speed = 0.5,
+	// 		centerScale = 1;
+
+	// 	var ball = new Ball();
+
+	// 	ball.x = canvas.width / 2;
+	// 	ball.y = canvas.height / 2;
+
+
+	// 	(function drawFram(){
+	// 		window.requestAnimationFrame(drawFram, context);
+
+	// 		context.clearRect(0,0,canvas.width, canvas.height);
+
+	// 		// 正弦的值导致缩放
+	// 		ball.scaleX = ball.scaleY = centerScale + Math.sin(angle) * range;
+
+	// 		angle += speed;
+
+	// 		ball.draw(context);
+	// 	})();
+	// }
+	// 
+	// 
+	// 圆周运动
+	// window.onload = function(){
+	// 	var canvas = document.getElementById('canvas');
+	// 	var context = canvas.getContext('2d');
+
+	// 	var ball = new Ball();
+
+	// 	var angle = 0,
+	// 		centerX = canvas.width / 2,
+	// 		centerY = canvas.height / 2,
+	// 		radius = 100,
+	// 		speed = 0.05;  // 每帧运动的度数
+
+	// 	(function drawFram(){
+	// 		window.requestAnimationFrame(drawFram, context);
+
+	// 		context.clearRect(0,0, canvas.width, canvas.height);
+	// 		// 绕画布的中心位置转动
+	// 		// 圆的极坐标公式
+	// 		// x = R * cos(a);
+	// 		// y = R * sin(a);
+	// 		ball.x = centerX + Math.sin(angle) * radius; 
+	// 		ball.y = centerY + Math.cos(angle) * radius;
+
+	// 		angle += speed;
+
+	// 		ball.draw(context);
+	// 	})();
+
+	// }
+	// 
+	// 椭圆运动
+	// 
 	window.onload = function(){
 		var canvas = document.getElementById('canvas');
 		var context = canvas.getContext('2d');
 
 		var ball = new Ball();
 
-		ball.x = canvas.width / 2;
-		ball.y = canvas.height / 2;
-
 		var angle = 0,
-			range = 50; //  振幅
+			centerX = canvas.width / 2,
+			centerY = canvas.height / 2,
+			radiusA = 50; // 椭圆的短半轴
+			radiusB = 100; // 椭圆的长半轴
+			radius = 100,
+			speed = 0.05;  // 每帧运动的度数
+
+		ball.x = centerX;
+		ball.y = centerY;
 
 		(function drawFram(){
 			window.requestAnimationFrame(drawFram, context);
+			context.clearRect(0,0, canvas.width, canvas.height);
 
-			context.clearRect(0, 0, canvas.width, canvas.height);
+			ball.x = centerX + Math.cos(angle) * radiusA;
+			ball.y = centerY + Math.sin(angle) * radiusB;
 
-			ball.x = canvas.width / 2 + Math.sin(angle) * range; // 核心部分，圆心的x坐标成正弦波变化
-
-			angle += 0.1; // 每一帧角度加0.1
+			angle += speed;
 
 			ball.draw(context);
-		})()
 
+		})();
 	}
 </script>
 </html>
