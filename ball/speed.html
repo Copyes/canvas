@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>速度与加速度运动</title>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500" style="background-color: #000;">
+		<p>大兄弟你的浏览器竟然连canvas都不支持</p>
+	</canvas>
+</body>
+<script src="../util.js"></script>
+<script src="./ball.js"></script>
+<script>
+	// 匀速直线运动
+	// window.onload = function(){
+	// 	var canvas = document.getElementById('canvas');
+	// 	var context = canvas.getContext('2d');
+
+	// 	var ball = new Ball();
+
+	// 	ball.x = canvas.width / 2;
+	// 	ball.y = canvas.height / 2;
+
+	// 	var vx = 1; // x轴方向的速度
+
+	// 	(function drawFram(){
+
+	// 		window.requestAnimationFrame(drawFram, context);
+	// 		context.clearRect(0,0, canvas.width, canvas.height);
+
+	// 		ball.x += vx;
+
+	// 		ball.draw(context);
+
+	// 	})(); 
+	// }
+
+	// 速度分解的运动
+	window.onload = function(){
+		var canvas = document.getElementById('canvas');
+		var context = canvas.getContext('2d');
+
+		var ball = new Ball();
+
+		ball.x = canvas.width / 2;
+		ball.y = canvas.height / 2;
+
+		var angle = 30;
+		var speed = 5;
+
+
+		(function drawFram(){
+
+			window.requestAnimationFrame(drawFram, context);
+			context.clearRect(0,0, canvas.width, canvas.height);
+
+			var vx = Math.cos(angle * Math.PI / 180) * speed;
+			var vy = Math.sin(angle * Math.PI / 180) * speed;
+
+			//angle += 1;
+
+			ball.x += vx;
+			ball.y += vy;
+
+
+			ball.draw(context);
+
+		})(); 
+
+	}	
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>旋转的箭头</title>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500" style="background:#ccc;">
+		<p>大兄弟你的浏览器不支持连canvas都不支持哦</p>
+	</canvas>
+</body>
+<script src="./arrow.js"></script>
+<script src="../util.js"></script>
+<script>
+	window.onload = function(){
+		var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+		var arrow = new Arrow();
+
+		arrow.x = canvas.width / 2;
+		arrow.y = canvas.height / 2;
+
+		var mouse = utils.captureMouse(canvas);
+
+		var angle = 0, speed = 4; // 定义速度和方向
+
+		(function drawFram(){
+
+			window.requestAnimationFrame(drawFram, context);
+
+			context.clearRect(0,0, canvas.width, canvas.height);
+
+			var dx = mouse.x - arrow.x;
+			var dy = mouse.y - arrow.y;
+			// 计算角度
+			angle = Math.atan2(dy,dx);
+			// 箭头旋转
+			arrow.rotation = angle; // 默认为弧度
+			// 将速度分解
+			var vx = Math.cos(angle) * speed;
+			var vy = Math.sin(angle) * speed;
+
+			arrow.x += vx;
+			arrow.y += vy;
+
+			arrow.draw(context);
+		})();
+
+	}	
+
+
+</script>
+</html>

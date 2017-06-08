@@ -22,3 +22,14 @@
 			   x_position = centerX + Math.cos(angle)*radiusX;
 			   y_position = centerY + Math.sin(angle)*radiusY;
 			   angle += speed;
+
+-	[x] 4、基本的速度与加速度运动
+
+
+		总结：
+
+			-  已知某一方向速度求x,y方向的速度
+			   
+			   var vx = Math.cos(angle * Math.PI / 180) * speed;
+			   var vy = Math.sin(angle * Math.PI / 180) * speed;	
+
