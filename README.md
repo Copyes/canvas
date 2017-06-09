@@ -13,23 +13,24 @@
 -	[x] 3、基本的圆周运动，椭圆运动
 
 		总结：
-			-  正圆运动
-			   x_position = centerX + Math.sin(angle)*radius;
-			   y_position = centerY + Math.cos(angle)*radius;
-			   angle += speed;
+			-   正圆运动
+			    x_position = centerX + Math.sin(angle)*radius;
+			    y_position = centerY + Math.cos(angle)*radius;
+			    angle += speed;
 
-			-  椭圆运动
-			   x_position = centerX + Math.cos(angle)*radiusX;
-			   y_position = centerY + Math.sin(angle)*radiusY;
-			   angle += speed;
+			-   椭圆运动
+			    x_position = centerX + Math.cos(angle)*radiusX;
+			    y_position = centerY + Math.sin(angle)*radiusY;
+			    angle += speed;
 
 -	[x] 4、基本的速度与加速度运动
 
-
 		总结：
+			-   已知某一方向速度求x,y方向的速度
+			    var vx = Math.cos(angle * Math.PI / 180) * speed;
+			    var vy = Math.sin(angle * Math.PI / 180) * speed;
 
-			-  已知某一方向速度求x,y方向的速度
-			   
-			   var vx = Math.cos(angle * Math.PI / 180) * speed;
-			   var vy = Math.sin(angle * Math.PI / 180) * speed;	
-
+			-   加速度运动相关加速度计算，以及简单的碰撞检测
+	 		    ax = Math.cos(angle * Math.PI / 180) * a;
+	 		    ay = Math.sin(angle * Math.PI / 180) * a;	
+				ball.y + ball.radius > canvas.height
