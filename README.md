@@ -34,3 +34,19 @@
 	 		    ax = Math.cos(angle * Math.PI / 180) * a;
 	 		    ay = Math.sin(angle * Math.PI / 180) * a;	
 				ball.y + ball.radius > canvas.height
+
+			-	任意方向速度
+				vx = speed * Math.cos(angle);
+				vy = speed * Math.sin(angle);
+
+			-	任意方向加速度
+				ax = force * Math.cos(angle);
+				ay = force * Math.xin(angle);
+
+			-	改变速度
+				vx += ax;
+				vx += ay;
+
+			-	改变位置
+				object.x += vx;
+				object.y += vy;
