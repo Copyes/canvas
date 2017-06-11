@@ -21,6 +21,7 @@ function Ball(radius, color){
 	this.rotation = 0;  // 旋转角度
 	this.color = utils.parseColor(color);
 	this.lineWidth = 1; // 外圈宽度
+	this.id = '';
 }
 
 /**

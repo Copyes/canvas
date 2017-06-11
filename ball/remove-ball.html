@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>超出边界移除</title>
+</head>
+<body>
+	<canvas id="canvas" width="400" height="400" style="background-color: #000;">大兄弟你的浏览器不支持canvas</canvas>
+<p id="log"></p>
+<script src="../util.js"></script>
+<script src="./ball.js"></script>
+<script>
+	window.onload = function(){
+		var canvas = document.getElementById('canvas'),
+			context = canvas.getContext('2d'),
+			log = document.getElementById("log");
+
+		var balls = [],
+			ballNum = 10,
+			canWid = canvas.width,
+			canHig = canvas.height;
+
+		// 生成10个球
+		for(var i = ballNum - 1; i >= 0; i--){
+			var size = Math.random() * 20 + 5, // 大小
+				color = Math.random() * (0xffffff), // 颜色
+				ball = new Ball(size, color);
+
+			ball.id = 'ball_' + i;
+			ball.radius = Math.random() * 30 + 10;
+			ball.x = canWid / 2;
+			ball.y = canHig / 2;
+			ball.vx = Math.random() * 2 - 1;
+			ball.vy = Math.random() * 2 - 1;
+
+			balls.push(ball);
+		}
+
+		console.log(balls);
+
+		function draw(ball, index){
+			ball.x += ball.vx;
+			ball.y += ball.vy;
+
+			// 判断位置是不是超出范围了
+			if(ball.x > canWid + ball.radius || ball.y > canHig + ball.radius ||
+				ball.x + ball.radius < 0 || ball.y + ball.radius < 0){
+
+				// balls.splice(index, 1);
+
+				// if(balls.length > 0){
+				// 	log.innerHTML += '移除' + ball.id + '<br/>';
+				// } else {
+				// 	log.innerHTML += '已全部移除了';
+				// }
+				ball.x = canvas.width / 2;
+				ball.y = canvas.height / 2;
+				ball.vx = Math.random() * 2 - 1;
+				ball.vy = Math.random() * (-2) - 1;
+			}
+
+			ball.draw(context);
+		}
+
+
+		(function drawFrame(){
+			window.requestAnimationFrame(drawFrame, context);
+			context.clearRect(0,0, canvas.width, canvas.height);
+
+			// var i = balls.length;
+
+			// while(i--){
+			// 	draw(balls[i], i);
+			// }
+			balls.forEach(draw);
+		})();
+	}
+</script>
+</body>
+</html>
