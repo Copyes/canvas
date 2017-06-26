@@ -16,31 +16,40 @@
 			var canvas = document.getElementById('canvas'),
 				context = canvas.getContext('2d');
 
-			var txt = document.getElementById('txt');
-
 			var mouse = utils.captureMouse(canvas);
 			var ball = new Ball(20, 'red');
 				ball.x = canvas.width / 2;
 				ball.y = canvas.height / 2;
-				ball.draw(context);
+				//ball.draw(context);
 
-			function state(msg){
-				if(utils.containsPoints(ball.getBounds(), mouse.x, mouse.y)){
-					txt.value = 'in ball' + msg;
-				}else{
-					txt.value = 'canvas' + msg;
-				}
-			}
+			var w = 0,h = 0;
 
 			canvas.addEventListener('mousedown', function(e){
-				state('mousedown');
-				canvas.addEventListener('mouseup', function(e){
-					state('mouseup');
-				},true);
-				canvas.addEventListener('mousemove', function(e){
-					state('mousemove');
-				},true);
+				if(utils.containsPoints(ball.getBounds(), mouse.x, mouse.y)){
+					w = mouse.x - ball.x;
+					h = mouse.y - ball.y;
+					canvas.addEventListener('mouseup', onMouseUp,false);
+					canvas.addEventListener('mousemove', onMouseMove, false);
+				}
+				
 			}, true);
+
+			function onMouseUp(e){
+				canvas.removeEventListener('mouseup', onMouseUp, false);
+				canvas.removeEventListener('mousemove', onMouseMove, false);
+			}
+
+			function onMouseMove(e){
+				ball.x = mouse.x - w;
+				ball.y = mouse.y - h;
+
+			}
+
+			(function dramFrame(){
+				window.requestAnimationFrame(dramFrame, canvas);
+                context.clearRect(0, 0, canvas.width, canvas.height);
+				ball.draw(context);
+			})();
 
 		}
 	</script>
