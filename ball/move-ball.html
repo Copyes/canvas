@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>移动物体</title>
+</head>
+<body>
+	<canvas id="canvas" width="400" height="400" style="background: #000;">
+		<p>大兄弟你的浏览器不支持canvas</p>
+	</canvas>
+	<textarea name="textarea" id="txt" cols="30" rows="10"></textarea>
+	<script src="./ball.js"></script>
+	<script src="../util.js"></script>
+	<script>
+		window.onload = function(){
+			var canvas = document.getElementById('canvas'),
+				context = canvas.getContext('2d');
+
+			var txt = document.getElementById('txt');
+
+			var mouse = utils.captureMouse(canvas);
+			var ball = new Ball(20, 'red');
+				ball.x = canvas.width / 2;
+				ball.y = canvas.height / 2;
+				ball.draw(context);
+
+			function state(msg){
+				if(utils.containsPoints(ball.getBounds(), mouse.x, mouse.y)){
+					txt.value = 'in ball' + msg;
+				}else{
+					txt.value = 'canvas' + msg;
+				}
+			}
+
+			canvas.addEventListener('mousedown', function(e){
+				state('mousedown');
+				canvas.addEventListener('mouseup', function(e){
+					state('mouseup');
+				},true);
+				canvas.addEventListener('mousemove', function(e){
+					state('mousemove');
+				},true);
+			}, true);
+
+		}
+	</script>
+</body>
+</html>

@@ -5,7 +5,17 @@
 
 window.utils = {};
 
-
+/**
+ * 改点是不是在该规则形状内
+ * @param  {[type]} rect [description]
+ * @param  {[type]} x    [description]
+ * @param  {[type]} y    [description]
+ * @return {[type]}      [description]
+ */
+window.utils.containsPoints = function(rect, x, y){
+    return !(x < rect.x || x > rect.x + rect.width
+            || y < rect.y || y > rect.y + rect.height);
+}
 /**
  * [captureMouse description] 获取鼠标的坐标位置
  * @param  {[type]} element canvas画布

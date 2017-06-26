@@ -23,6 +23,19 @@ function Ball(radius, color){
 	this.lineWidth = 1; // 外圈宽度
 	this.id = '';
 }
+/**
+ * 获取球的边界
+ * @param  {[type]} context [description]
+ * @return {[type]}         [description]
+ */
+Ball.prototype.getBounds = function(context){
+	return {
+		x: this.x - this.radius,
+		y: this.y - this.radius,
+		width: this.radius * 2,
+		height: this.radius * 2
+	}
+}
 
 /**
  * [draw description]  画球
