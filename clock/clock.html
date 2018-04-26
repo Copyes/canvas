@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #id {
+      background: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas" width="400" height="400"></canvas>
+</body>
+<script type="text/javascript">
+  let oContainer = document.getElementById('canvas')
+  let ctx = oContainer.getContext('2d')
+
+  function Draw() {
+    let x = 200,
+      y = 200,
+      r = 150
+
+    ctx.clearRect(0, 0, oContainer.width, oContainer.height)
+    let oDate = new Date()
+    let oHour = oDate.getHours()
+    let oMin = oDate.getMinutes()
+    let oSec = oDate.getSeconds()
+
+    // 弧度计算
+    let oHourValue = (-90 + oHour * 30 + oMin / 2) * Math.PI / 180
+    let oMinValue = (-90 + oMin * 6) * Math.PI / 180
+    let oSecValue = (-90 + oSec * 6) * Math.PI / 180
+    // 画刻度
+    DrawScale(x, y, r, 60, 6)
+    // 表盘
+    drawDial(x, y, r, 'white', 19)
+    // 大刻度
+    ctx.lineWidth = 3
+    // 刻度
+    DrawScale(x, y, r, 12, 30)
+    // 表盘 
+    drawDial(x, y, r, 'white', 18)
+    // 时针
+    drawHand(x, y, r, 5, 10, oHourValue)
+    // 分针
+    drawHand(x, y, r, 3, 14, oMinValue)
+    // 秒针 
+    drawHand(x, y, r, 1, 17, oSecValue)
+  }
+  // 画刻度
+  function DrawScale(x, y, r, l, baseDegree) {
+    ctx.beginPath()
+    for (let j = 0; j < l; ++j) {
+      ctx.moveTo(x, y)
+      ctx.arc(x, y, r, baseDegree * j * Math.PI / 180, baseDegree * (j + 1) *
+        Math.PI / 180, false)
+    }
+    ctx.closePath()
+    ctx.stroke()
+  }
+  // 画表盘
+  function drawDial(x, y, r, color, per) {
+    ctx.fillStyle = color
+    ctx.beginPath()
+    ctx.moveTo(x, y)
+    ctx.arc(x, y, r * per / 20, 0, 360 * Math.PI / 180, false)
+    ctx.closePath()
+    ctx.fill()
+  }
+  // 画针
+  function drawHand(x, y, r, w, l, angle) {
+    ctx.lineWidth = w
+    ctx.beginPath()
+    ctx.moveTo(x, y)
+    ctx.arc(x, y, r * l / 20, angle, angle, false)
+    ctx.closePath()
+    ctx.stroke()
+  }
+  Draw()
+  setInterval(Draw, 1000)
+</script>
+
+</html>
